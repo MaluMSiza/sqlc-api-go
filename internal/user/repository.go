@@ -28,6 +28,14 @@ func (r *UserRepository) GetUser(ctx context.Context, id int32) (database.User, 
 	return r.Queries.GetUser(ctx, id)
 }
 
+func (r *UserRepository) GetAllUsers(ctx context.Context) ([]database.User, error) {
+	return r.Queries.GetAllUsers(ctx)
+}
+
+func (r *UserRepository) GetUserAge(ctx context.Context, id int32) (float64, error) {
+	return r.Queries.GetUserAge(ctx, id)
+}
+
 func (r *UserRepository) UpdateUser(ctx context.Context, id int32, name string, birthDate pgtype.Date, cpf string) (database.User, error) {
 	return r.Queries.UpdateUser(ctx, database.UpdateUserParams{
 		ID:        id,

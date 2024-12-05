@@ -5,18 +5,28 @@ This project leverages the **Echo** framework and **SQLC** to build a Go API int
 
 ## Versioning Table
 
-| Date       |    Version    |                           Description                           |     Commit    | 
-|------------|---------------|-----------------------------------------------------------------|---------------| 
-| 2024-12-05 | 0.1.1         | x |   `xxxxxxx`   | 
-| 2024-12-04 | 0.1.0 :tada:  | Initial project setup with basic structure and dependencies.    |   `xxxxxxx`   | 
+| Date       |      Version     |                           Description                           |     Commit    | 
+|------------|------------------|-----------------------------------------------------------------|---------------| 
+| 2024-12-05 | 0.1.1 :sparkles: |        Added cpf validation + GetAllUsers + GetuserAge          |   `xxxxxxx`   | 
+| 2024-12-04 | 0.1.0 :tada:     | Initial project setup with basic structure and dependencies.    |   `5bca6da`   | 
 
----
+## Table of Contents
+1. [Project Estructure](#project-structure)
+2. [Main Workflow](#main-workflow)
+3. [Setup Instructions](#setup-instructions)
+4. [Installation from scratch](#installation-from-scratch)
+5. [API Documentation](#api-documentation)
+6. [References](#references)
 ---
 
 ## Project Structure
 
+![Structure](docs/structure.png)
+
+
 ```plaintext
 sqlc-api-go/
+├── doc/                    # Documentations and diagrams
 ├── cmd/main.go             # Application entry point, initializes and starts the server
 ├── internal/user/          # Business logic and data access layer for user-related operations
 │   ├── handler.go          # Handles HTTP requests and responses for user routes
@@ -37,16 +47,54 @@ sqlc-api-go/
 
 ---
 
-## Dependencies
-
-### Libraries Used
-
-- **[Echo](https://echo.labstack.com/docs):** Web framework for routing and middleware management.
-- **[SQLC](https://docs.sqlc.dev/en/latest/overview/install.html):** Generates Go code from SQL files, ensuring strongly typed queries.
-- **[PGX Pool](https://github.com/jackc/pgx):** PostgreSQL database connection library with connection pooling support.
-- **[Godotenv](https://github.com/joho/godotenv):** Loads environment variables from `.env` files, simplifying development and production setup.
+## Main Workflow
+1. **Connect to the database (Pool):** Initialize the DB pool using `config.InitDB`.
+2. **Create Queries instance:** Use the pool to generate `Queries` for database operations.
+3. **Setup layers:**
+   - Build **Repository** with `Queries`.
+   - Build **Service** with Repository.
+   - Build **Handler** with Service.
+4. **Initialize Echo and endpoints:** Create an Echo instance, define routes, and start the server on port `8080`.
 
 ---
+## Setup instructions 
+
+Clone the Repository
+Clone the project to your local machine:
+
+```bash
+git clone https://github.com/MaluMSiza/sqlc-api-go.git
+cd sqlc-api-go
+```
+
+Install Dependencies
+Make sure you have Go installed, then download the required dependencies:
+
+```bash
+go mod tidy
+```
+Set Up Environment Variables
+Create a .env file in the root directory with the following variables:
+
+```env
+DB_USER=xxxxx
+DB_PASSWORD=xxxxx
+DB_HOST=xxxxx
+DB_PORT=xxxxx
+DB_NAME=xxxxx
+```
+Replace `xxxxx` with your PostgreSQL credentials.
+
+Create your queries
+Create you `schema.sql` and `query.sql` and generate your queries:
+```bash
+sqlc generate
+```
+Run the Server:
+```bash
+cd cmd
+go run main.go
+```
 
 ## Installation from scratch
 
@@ -70,8 +118,12 @@ sqlc-api-go/
    ```
 
 4. **Prepare the Database**:
-   - Use `schema.sql` to create the database schema.
+   - Use `schema.sql` to create the database schema, configure `sqlc.yaml`.
    - Configure the connection settings in the `.env` file.
+   - Use sqlc generate to create de `database` module
+   ```bash
+   sqlc generate
+   ```
 
 5. **Run the Server**:
    ```bash
@@ -81,4 +133,28 @@ sqlc-api-go/
 
 ---
 
+### API Documentation
+---
 
+You can easily interact with the API using **Postman**. To do this, follow the steps below to import the API documentation directly from this repository:
+
+   #### 1. Access the JSON Documentation
+
+   The API documentation is available in **JSON** format in this repository. You can view the file by clicking the link below:
+
+   - [API Documentation (JSON)](docs/api-documentation.json)
+
+   #### 2. Import the Documentation into Postman
+
+   To import the documentation into **Postman**, follow these steps:
+
+   - Open **Postman** and click on **"Import"** in the top left corner.
+   - Select **"Upload Files"** and choose the `api-documentation.json` file from the `doc` folder in this repository.
+---
+
+
+## References 
+
+- **[Echo](https://echo.labstack.com/docs):** Web framework for routing and middleware management.
+- **[SQLC](https://docs.sqlc.dev/en/latest/overview/install.html):** Generates Go code from SQL files, ensuring strongly typed queries.
+- **[Clean architeture](https://github.com/bxcodec/go-clean-arch/tree/master):** Go Clean Architecture

@@ -16,3 +16,10 @@ RETURNING *;
 DELETE FROM "user" WHERE id = $1
 RETURNING *;
 
+-- name: GetAllUsers :many
+SELECT * FROM "user";
+
+-- name: GetUserAge :one
+SELECT DATE_PART('year', AGE(birth_date)) AS age
+FROM "user"
+WHERE id = $1;

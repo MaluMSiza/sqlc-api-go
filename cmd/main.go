@@ -24,7 +24,9 @@ func main() {
 
 
 	e.POST("/users", userHandler.CreateUserHandler)
+	e.GET("/users", userHandler.GetAllUsersHandler)
 	e.GET("/users/:id", userHandler.GetUserHandler)
+	e.GET("/users/age/:id", userHandler.GetUserAgeHandler)
 	e.PUT("/users/:id", userHandler.UpdateUserHandler)
 	e.DELETE("/users/:id", userHandler.DeleteUserHandler)
 

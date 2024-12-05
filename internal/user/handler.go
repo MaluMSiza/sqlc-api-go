@@ -51,6 +51,32 @@ func (h *UserHandler) GetUserHandler(c echo.Context) error {
 	return c.JSON(http.StatusOK, user)
 }
 
+func (h *UserHandler) GetAllUsersHandler(c echo.Context) error {
+
+	user, err := h.service.GetAllUsers(c.Request().Context())
+	if err != nil {
+		return c.JSON(http.StatusNotFound, map[string]string{"error": "Users not found"})
+	}
+
+	return c.JSON(http.StatusOK, user)
+}
+
+func (h *UserHandler) GetUserAgeHandler(c echo.Context) error {
+	id := c.Param("id")
+	parsedID, err := strconv.ParseInt(id, 10, 32)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid ID"})
+	}
+
+	age, err := h.service.GetUserAge(c.Request().Context(), int32(parsedID))
+	if err != nil {
+		return c.JSON(http.StatusNotFound, map[string]string{"error": "User not found"})
+	}
+
+	return c.JSON(http.StatusOK, age)
+}
+
+
 func (h *UserHandler) UpdateUserHandler(c echo.Context) error {
 	id := c.Param("id")
 

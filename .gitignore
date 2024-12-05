@@ -1,8 +1,5 @@
 .env
 
-/go.sum
-/go.mod
-
 *.exe
 *.dll
 *.so
