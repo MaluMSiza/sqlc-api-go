@@ -6,7 +6,6 @@ import (
 	"github.com/MaluMSiza/sqlc-api-go/config"
 	"github.com/MaluMSiza/sqlc-api-go/internal/user"
 	"github.com/labstack/echo/v4"
-	// "github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
@@ -20,8 +19,6 @@ func main() {
 	userHandler := user.NewUserHandler(userService)
 
 	e := echo.New()
-	// e.Use(middleware.CORS())
-
 
 	e.POST("/users", userHandler.CreateUserHandler)
 	e.GET("/users", userHandler.GetAllUsersHandler)

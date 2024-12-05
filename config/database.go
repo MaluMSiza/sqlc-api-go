@@ -15,7 +15,7 @@ var DBPool *pgxpool.Pool
 func InitDB() {
     err := godotenv.Load("../.env") 
     if err != nil {
-        log.Fatal("Erro ao carregar arquivo .env")
+        log.Fatal("Error loading .env file")
     }
 
     connString := fmt.Sprintf(
@@ -29,9 +29,9 @@ func InitDB() {
 
     DBPool, err = pgxpool.New(context.Background(), connString)
     if err != nil {
-        log.Fatal("Erro ao conectar no banco:", err)
+        log.Fatal("Error connecting to the database:", err)
     }
-    log.Println("Conexão com o banco bem-sucedida!")
+    log.Println("Database connection successful!")
 }
 
 func CloseDB() {
