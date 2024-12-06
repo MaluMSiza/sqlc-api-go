@@ -6,8 +6,9 @@ This project leverages the **Echo** framework and **SQLC** to build a Go API int
 ## Versioning Table
 
 | Date       |        Version      |                           Description                           |     Commit    | 
-|------------|---------------------|-----------------------------------------------------------------|---------------| 
-| 2024-12-05 | 0.1.2 :wastebasket: |                           Clean code                            |   `xxxxxxx`   | 
+|------------|---------------------|-----------------------------------------------------------------|---------------|
+| 2024-12-05 | 0.1.3 :zap:         | Refactor README and comments for better readability and clarity |   `xxxxxxx`   |  
+| 2024-12-05 | 0.1.2 :wastebasket: |                           Clean code                            |   `4bbc3e9`   | 
 | 2024-12-05 | 0.1.1 :sparkles:    |        Added cpf validation + GetAllUsers + GetuserAge          |   `d6aafd1`   | 
 | 2024-12-04 | 0.1.0 :tada:        | Initial project setup with basic structure and dependencies.    |   `5bca6da`   | 
 
@@ -93,8 +94,7 @@ sqlc generate
 ```
 Run the Server:
 ```bash
-cd cmd
-go run main.go
+go run ./cmd/main.go
 ```
 
 ## Installation from scratch
@@ -128,8 +128,7 @@ go run main.go
 
 5. **Run the Server**:
    ```bash
-   cd cmd
-   go run main.go
+   go run ./cmd/main.go
    ```
 
 ---
