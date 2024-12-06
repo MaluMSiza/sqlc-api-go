@@ -1,4 +1,4 @@
-CREATE TABLE "user" (
+CREATE TABLE IF NOT EXISTS "user" (
     id SERIAL PRIMARY KEY,          
     name TEXT NOT NULL,             
     birth_date DATE NOT NULL,       
@@ -6,5 +6,3 @@ CREATE TABLE "user" (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP   
 );
-
-CREATE INDEX idx_user_cpf ON "user" (cpf);
